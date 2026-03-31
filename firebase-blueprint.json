@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "News": {
+      "title": "News Article",
+      "description": "A news article with title, content, category, and metadata.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Title of the news article in Bengali." },
+        "content": { "type": "string", "description": "Full content of the news article in Bengali." },
+        "category": { "type": "string", "description": "Category of the news (e.g., রাজনীতি, খেলাধুলা, বিনোদন)." },
+        "imageUrl": { "type": "string", "format": "url", "description": "URL of the featured image." },
+        "authorUid": { "type": "string", "description": "UID of the admin who created the news." },
+        "authorName": { "type": "string", "description": "Name of the admin who created the news." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the news was created." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Timestamp when the news was last updated." },
+        "isPublished": { "type": "boolean", "description": "Whether the news is visible to the public." }
+      },
+      "required": ["title", "content", "category", "authorUid", "createdAt"]
+    },
+    "User": {
+      "title": "User Profile",
+      "description": "Admin user profile data.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID." },
+        "email": { "type": "string", "format": "email", "description": "Admin email address." },
+        "displayName": { "type": "string", "description": "Admin display name." },
+        "role": { "type": "string", "enum": ["admin"], "description": "User role (only admin for now)." }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/news/{newsId}": {
+      "schema": "News",
+      "description": "Collection of news articles."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Collection of admin user profiles."
+    }
+  }
+}
